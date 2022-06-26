@@ -117,8 +117,8 @@ class MyServer(BaseHTTPRequestHandler):
         query = urlparse(self.path).query
         query_components = dict(qc.split("=") for qc in query.split("&"))
         api = query_components["api"]
-        print(api)
         if api == "requestJoin":
+            placeID = query_components["placeid"]
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
@@ -127,6 +127,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes("<body>", "utf-8"))
             self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
             self.wfile.write(bytes("</body></html>", "utf-8"))
+            startGame(int(placeID))
 
 if __name__ == "__main__":        
     webServer = HTTPServer((hostName, serverPort), MyServer)
