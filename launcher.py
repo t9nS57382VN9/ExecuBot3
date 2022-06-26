@@ -107,7 +107,7 @@ print("\n[j] Join via place ID")
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 
-hostName = "localhost"
+hostName = "136.244.107.30"
 serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
