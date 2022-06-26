@@ -112,6 +112,7 @@ serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
+	print(self.path)
         if self.path == "requestJoin":
             self.send_response(200)
             self.send_header("Content-type", "text/html")
