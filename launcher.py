@@ -110,7 +110,7 @@ import time
 hostName = "136.244.107.30"
 serverPort = 8080
 
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
