@@ -117,7 +117,7 @@ class MyServer(BaseHTTPRequestHandler):
         query = urlparse(self.path).query
         query_components = dict(qc.split("=") for qc in query.split("&"))
         api = query_components["api"]
-	print(api)
+        print(api)
         if api == "requestJoin":
             self.send_response(200)
             self.send_header("Content-type", "text/html")
