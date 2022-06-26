@@ -110,10 +110,15 @@ import time
 hostName = "136.244.107.30"
 serverPort = 8080
 
+from urlparse import urlparse
+
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        print(self.path)
-        if self.path == "requestJoin":
+        query = urlparse(self.path).query
+        query_components = dict(qc.split("=") for qc in query.split("&"))
+        api = query_components["api"]
+	print(api)
+        if api == "requestJoin":
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
