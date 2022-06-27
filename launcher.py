@@ -26,8 +26,20 @@ def selectGame():
     else:
         print("invalid option")
         selectGame()
+	
+def modify_rule(rule_name, state):
+    """ Enable/Disable specific rule, 0 = Disable / 1 = Enable """
+    state, message = ("yes", "Enabled") if state else ("no", "Disabled")
+    subprocess.call(
+        f"netsh advfirewall firewall set rule name={rule_name} new enable={state}", 
+        shell=True, 
+        stdout=DEVNULL, 
+        stderr=DEVNULL
+    )
+    print(f"Rule {rule_name} {message}")
 
 def startGame(placeID):
+    modify_rule("RBXSERVER", 0)
     print("checking latest version of ROBLOX... ", end = "")
     version = requests.get("http://setup.roblox.com/version.txt").content.decode("ascii")
     path = os.getenv("LOCALAPPDATA")+"\\Roblox\\Versions\\"+version
@@ -75,6 +87,7 @@ def startGame(placeID):
         location = path+"\\RobloxPlayerBeta.exe"
         args = "--play -a https://auth.roblox.com/v1/authentication-ticket/redeem -t {ticket} -j https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGame&placeId={placeID}&isPlayTogetherGame=false --launchtime={timestamp}"
 
+    modify_rule("RBXSERVER", 1)
     Popen([location, args.format(ticket = ticket, timestamp = '{0:.0f}'.format(round(time.time() * 1000)), placeID = placeID)])
 
     time.sleep(5)
