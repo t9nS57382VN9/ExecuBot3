@@ -87,10 +87,12 @@ def startGame(placeID):
         location = path+"\\RobloxPlayerBeta.exe"
         args = "--play -a https://auth.roblox.com/v1/authentication-ticket/redeem -t {ticket} -j https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGame&placeId={placeID}&isPlayTogetherGame=false --launchtime={timestamp}"
 
-    modify_rule("RBXSERVER", 1)
     Popen([location, args.format(ticket = ticket, timestamp = '{0:.0f}'.format(round(time.time() * 1000)), placeID = placeID)])
 
-    time.sleep(5)
+    time.sleep(1)
+    modify_rule("RBXSERVER", 1)
+	
+    time.sleep(4)
 
 os.system("cls")
 print("ROBLOX desktop launcher - who needs a web browser?\n")
