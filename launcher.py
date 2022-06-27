@@ -39,7 +39,7 @@ def modify_rule(rule_name, state):
     print(f"Rule {rule_name} {message}")
 
 def startGame(placeID):
-    modify_rule("RBXSERVER", 0)
+    #modify_rule("RBXSERVER", 0)
     print("checking latest version of ROBLOX... ", end = "")
     version = requests.get("http://setup.roblox.com/version.txt").content.decode("ascii")
     path = os.getenv("LOCALAPPDATA")+"\\Roblox\\Versions\\"+version
